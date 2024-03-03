@@ -22,7 +22,7 @@ def browser(request):
     user_language = request.config.getoption("user_language")
     # Chrome
     chrome_options = ChromeOptions()
-    # chrome_options.add_argument('--headless')
+    chrome_options.add_argument('--headless')
     chrome_options.add_experimental_option('prefs', {'intl.accept_languages': user_language})
     # Firefox
     firefox_options = FirefoxOptions()
