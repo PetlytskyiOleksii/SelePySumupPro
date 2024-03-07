@@ -4,7 +4,6 @@ from selenium.common.exceptions import ElementNotVisibleException, ElementNotInt
 from selenium.common.exceptions import NoAlertPresentException
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
-
 from pages.locators import BasePageLocators
 
 
@@ -13,11 +12,11 @@ class BasePage:
         self.browser = browser
         self.url = url
 
-    def click_to_login_button(self):
+    def click_to_login_link(self):
         login_link = self.browser.find_element(*BasePageLocators.LOGIN_LINK)
         login_link.click()
 
-    def should_be_login_button(self):
+    def should_be_login_link(self):
         self.is_element_present(*BasePageLocators.LOGIN_LINK), "Login button is not presented"
 
     def is_element_present(self, how, what):
@@ -70,5 +69,9 @@ class BasePage:
             alert.accept()
         except NoAlertPresentException:
             print("No second alert presented")
+
+    def click_to_basket_link(self):
+        basket_link = self.browser.find_element(*BasePageLocators.BASKET_LINK)
+        basket_link.click()
 
 

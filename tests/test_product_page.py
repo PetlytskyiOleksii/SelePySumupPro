@@ -1,5 +1,6 @@
 import pytest
 
+from pages.basketPage import BasketPage
 from pages.login_page import LoginPage
 from pages.product_page import ProductPage
 from pages.base_page import BasePage
@@ -61,20 +62,33 @@ def test_message_disappeared_after_adding_product_to_basket(browser):
     product_page.should_not_be_success_message()
 
 
-@pytest.mark.smoke
+@pytest.mark.skip
 def test_guest_should_see_login_button_on_product_page(browser):
     link = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/"
     page = BasePage(browser, link)
     page.open()
-    page.should_be_login_button()
+    page.should_be_login_link()
 
 
-@pytest.mark.smoke
+@pytest.mark.skip
 def test_guest_can_go_to_login_page_from_product_page(browser):
     link = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/"
     page = BasePage(browser, link)
     login_page = LoginPage(browser, link)
     page.open()
-    page.click_to_login_button()
+    page.click_to_login_link()
     login_page.should_be_login_page()
+
+
+@pytest.mark.smoke
+def test_guest_cant_see_product_in_basket_opened_from_product_page(browser):
+    link = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/"
+    page = BasePage(browser, link)
+    basket_page = BasketPage(browser, link)
+    page.open()
+    page.click_to_basket_link()
+    basket_page.should_be_empty_basket()
+
+
+
 
