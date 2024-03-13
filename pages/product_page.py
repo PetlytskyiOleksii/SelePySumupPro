@@ -18,12 +18,10 @@ class ProductPage(BasePage):
         return str(product_price)
 
     def should_be_add_product_button(self):
-        self.is_element_present(
+        assert self.is_element_present(
             *ProductPageLocators.ADD_TO_BASKET_BUTTON), 'Add product button is absent on the product page'
 
     def should_be_message_product_added_to_basket_with_correct_name(self):
-        print(self.browser.find_element(
-            *ProductPageLocators.PRODUCT_ADDED_TO_BASKET_MESSAGE).text)
         assert f"{self.get_product_name()} has been added to your basket." in self.browser.find_element(
             *ProductPageLocators.PRODUCT_ADDED_TO_BASKET_MESSAGE).text, \
             'message is incorrect after adding a product to basket'
@@ -37,4 +35,4 @@ class ProductPage(BasePage):
         assert self.is_not_element_present(*ProductPageLocators.PRODUCT_ADDED_TO_BASKET_MESSAGE), "success message is present but shouldn't"
 
     def should_not_be_success_message_disappear(self):
-        self.is_disappeared(*ProductPageLocators.PRODUCT_ADDED_TO_BASKET_MESSAGE), "success message is not disappear but should"
+        assert self.is_disappeared(*ProductPageLocators.PRODUCT_ADDED_TO_BASKET_MESSAGE), "success message is not disappear but should"
