@@ -22,6 +22,8 @@ class ProductPage(BasePage):
             *ProductPageLocators.ADD_TO_BASKET_BUTTON), 'Add product button is absent on the product page'
 
     def should_be_message_product_added_to_basket_with_correct_name(self):
+        print(self.browser.find_element(
+            *ProductPageLocators.PRODUCT_ADDED_TO_BASKET_MESSAGE).text)
         assert f"{self.get_product_name()} has been added to your basket." in self.browser.find_element(
             *ProductPageLocators.PRODUCT_ADDED_TO_BASKET_MESSAGE).text, \
             'message is incorrect after adding a product to basket'
